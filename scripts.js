@@ -1,52 +1,74 @@
 /*
-💡 O que será abordado nesse desafio:
+let student = prompt(`Qual é o nome do aluno? `)
 
-- Variáveis;
-- Operações matemáticas;
-- Operadores comparativos;
-- Condicional.
+let grade1 = prompt(`Qual é a primeira nota? `)
+let grade2 = prompt(`Qual é a segunda nota? `)
 
-</aside>
+let average = (Number(grade1) + Number(grade2)) / 2
 
-Bora praticar e rever tudo o que foi ensinado na aula? 💜
-Nesse desafio, você irá solicitar ao usuário que ele insira dois números e, a partir daí, calcular:
+let result = average > 7
 
-- [ ]  A soma dos dois números;
-- [ ]  A subtração dos dois números;
-- [ ]  A multiplicação dos dois números;
-- [ ]  A divisão dos dois números;
-- [ ]  O resto da divisão dos dois números;
+average = average.toFixed(1)
+
+if (result) {
+  alert(`A média do(a) aluno(a) ${student} é: ${average} 
+ Parabéns você passou no concurso!!!`) 
+} else {
+  alert(` ${student} sua média foi ${average}.
+ Não foi dessa vez! Você foi reprovado no concurso!!!`)
+}
 */
 
-let primaryValue = prompt(`Insira o primeiro valor: `)
-let secondValue = prompt(`Insira o segundo valor: `)
-
-primaryValue = Number(primaryValue)
-secondValue = Number(secondValue)
-
-const sum = primaryValue + secondValue
-const sub = primaryValue - secondValue
-const multi = primaryValue * secondValue
-const div = primaryValue / secondValue
-const restDiv = primaryValue % secondValue
+let option
+let students = [];
 
 
-alert(`A soma é: ${sum}`)
-alert(`A subtração é: ${sub}`)
-alert(`A multiplição é: ${multi}`)
-alert(`A divisão é: ${div}`)
-alert(`O resto da divcidão é: ${restDiv}`)
+while(option !== 3) {
+  
+  option = Number(prompt(
+  ` Selecione uma das opções para continuar:
 
-let same = primaryValue + secondValue;
+  1. Cadastrar novo estudante: 
+  2. Alunos cadastrados e suas médias: 
+  3. Sair do progama.
+ 
+ `));
 
-if (same % 2 === 0) {
-  alert(`A soma dos dois números é par.`);
-} else {
-  alert(`A soma dos dois números é ímpar.`);
+
+switch(option) {
+
+  case 1:
+    let student = prompt(`Qual o nome do aluno? `);
+    let grade1 = prompt(`Qual a primeira nota do aluno? `);
+    let grade2 = prompt(`Qual a segunda nota do aluno? `);
+
+    let average = (Number(grade1) + Number(grade2)) / 2;
+    if(average >= 7) {
+      alert(`Meus parabéns ${student}, sua media foi ${average} voce passou!!!`)
+    } else {alert(`Que pena ${student}, sua media foi ${average} voce reprovou`)
+  }
+
+    students.push({student, average});
+    break;
+
+  case 2:
+    if(students.length === 0) {
+      alert(`Ainda não existe alunos cadastrados!`);
+    } else {
+      let result = '';
+      students.forEach((item) => {
+        let status = item.average > 7 ? 'Aprovado' : 'Reprovado';
+      result += `Aluno: ${item.student}, Média: ${item.average}, Status: ${status}\n`;
+    });
+      alert(result);
+    }
+    break;
+
+  case 3:
+    alert(`Muito obrigado, tchau`)
+    break;
+
+  default:
+    alert(`Opção invalída. Tente novamente`)
 }
-
-if (primaryValue === secondValue) {
-  alert(`Os números são iguais`)
-} else {
-  alert(`Os números são diferentes`)
 }
