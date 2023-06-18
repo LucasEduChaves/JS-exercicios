@@ -1,3 +1,7 @@
+/* 
+Primeira tentetiva
+*/
+
 /*
 let student = prompt(`Qual é o nome do aluno? `)
 
@@ -19,56 +23,53 @@ if (result) {
 }
 */
 
-let option
+let option;
 let students = [];
 
-
-while(option !== 3) {
-  
+while (option !== 3) {
   option = Number(prompt(
-  ` Selecione uma das opções para continuar:
+    `Selecione uma das opções para continuar:
+    
+    1. Cadastrar novo estudante
+    2. Alunos cadastrados e suas médias
+    3. Sair do programa
+    
+  `));
 
-  1. Cadastrar novo estudante: 
-  2. Alunos cadastrados e suas médias: 
-  3. Sair do progama.
- 
- `));
+  switch (option) {
+    case 1:
+      let student = prompt("Qual o nome do aluno?");
+      let grade1 = prompt("Qual a primeira nota do aluno?");
+      let grade2 = prompt("Qual a segunda nota do aluno?");
 
+      let average = (Number(grade1) + Number(grade2)) / 2;
+      if (average >= 7) {
+        alert(`Meus parabéns, ${student}! Sua média foi ${average}. Você passou!`);
+      } else {
+        alert(`Que pena, ${student}! Sua média foi ${average}. Você reprovou.`);
+      }
 
-switch(option) {
+      students.push({ student, average });
+      break;
 
-  case 1:
-    let student = prompt(`Qual o nome do aluno? `);
-    let grade1 = prompt(`Qual a primeira nota do aluno? `);
-    let grade2 = prompt(`Qual a segunda nota do aluno? `);
+    case 2:
+      if (students.length === 0) {
+        alert("Ainda não existem alunos cadastrados!");
+      } else {
+        let result = "";
+        students.forEach((item) => {
+          let status = item.average > 7 ? "Aprovado" : "Reprovado";
+          result += `Aluno: ${item.student}, Média: ${item.average}, Status: ${status}\n`;
+        });
+        alert(result);
+      }
+      break;
 
-    let average = (Number(grade1) + Number(grade2)) / 2;
-    if(average >= 7) {
-      alert(`Meus parabéns ${student}, sua media foi ${average} voce passou!!!`)
-    } else {alert(`Que pena ${student}, sua media foi ${average} voce reprovou`)
+    case 3:
+      alert("Muito obrigado, tchau");
+      break;
+
+    default:
+      alert("Opção inválida. Tente novamente.");
   }
-
-    students.push({student, average});
-    break;
-
-  case 2:
-    if(students.length === 0) {
-      alert(`Ainda não existe alunos cadastrados!`);
-    } else {
-      let result = '';
-      students.forEach((item) => {
-        let status = item.average > 7 ? 'Aprovado' : 'Reprovado';
-      result += `Aluno: ${item.student}, Média: ${item.average}, Status: ${status}\n`;
-    });
-      alert(result);
-    }
-    break;
-
-  case 3:
-    alert(`Muito obrigado, tchau`)
-    break;
-
-  default:
-    alert(`Opção invalída. Tente novamente`)
-}
 }
